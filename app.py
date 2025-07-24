@@ -127,16 +127,16 @@ from flask import jsonify
 from werkzeug.security import generate_password_hash
 from models import db, User
 
-@app.route('/delete-wrong-admin')
+"""@app.route('/delete-wrong-admin')
 def delete_wrong_admin():
     user = User.query.filter_by(email='admin@example.com', is_admin=False).first()
     if user:
         db.session.delete(user)
         db.session.commit()
         return jsonify(message="Mistaken admin deleted successfully.")
-    return jsonify(message="No such mistaken admin found.")
+    return jsonify(message="No such mistaken admin found.")"""
 
-    
+
 if __name__ == '__main__':
     app.run(debug=True)
     
