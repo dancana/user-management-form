@@ -27,7 +27,7 @@ class EditProfileForm(FlaskForm):
 class AdminCreateUserForm(FlaskForm):
     username = StringField("Username", validators=[input_required()])
     email = StringField("Email", validators=[input_required(), Email()])
-    password = PasswordField("Password", validators=[input_required(), EqualTo('confirm', message='Passwords must match')])
+    password = PasswordField("Password", validators=[input_required(), EqualTo('comfirm_password', message='Passwords must match')])
     comfirm_password = PasswordField("Confirm Password", validators=[input_required()])
     submit = SubmitField("Create User")
 
