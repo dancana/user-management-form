@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My App{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+
+</head>
+    
+
+</head>
+<body>
+    <nav>
+        {% if current_user.is_authenticated %}
+    <div class="profile-preview">
+        <img src="{{ url_for('static', filename='uploads/' + current_user.profile_image) }}"
+             alt="Profile" class="navbar-profile-img">
+        <span>{{ current_user.username }}</span>
+    </div>
+{% endif %}
+
+        <a href="{{url_for('index')}}">Home</a>
+        {% if current_user.is_authenticated %}
+        <a href="{{ url_for('profile') }}">Profile</a>
+        {% if current_user.is_admin %}
+        <a href="{{ url_for('admin_dashboard') }}"></a>
+        {% endif %}
+        <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('register') }}">Register</a>
+        {% endif %}
+        
+
+        <button id="theme-toggle">🌙/☀️</button>
+    </nav>
+    <main>
+        {% block content %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flashes">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+          <span>{{ message }}</span>
+          <button class="close" onclick="this.parentElement.style.display='none';">&times;</button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+        <h1>Welcome to My App</h1>
+        {% endblock %}
+    </main>
+
+    <script src="url_for('static',filename='js/theme.js')"></script>
+</body>
+</html>
